@@ -1,4 +1,4 @@
-# POJO
+# Pojofill
 
 This is a library to instantiate a POJO (Plain Old Java Object) filled with example values.
 
@@ -15,11 +15,12 @@ public class Person {
 ```
 
 ```java
-import xxx;
+import org.hidetake.pojofill.Pojofill;
 
 public class Main {
     public static void main(String[] args) {
-        Foo foo = ExampleGenerator.newInstance(Foo.class);
+        Pojofill pojofill = new Pojofill();
+        Foo foo = pojofill.newInstance(Foo.class);
         System.out.println(foo);
     }
 }
