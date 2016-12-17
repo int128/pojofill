@@ -33,6 +33,7 @@ class PojofillSpec extends Specification {
             aFloat == defaultValueProvider.float
             aDouble == defaultValueProvider.double
             string == defaultValueProvider.charSequence
+            anEnum == AnEnum.FOO
         }
     }
 
@@ -52,6 +53,7 @@ class PojofillSpec extends Specification {
             aFloat == defaultValueProvider.float
             aDouble == defaultValueProvider.double
             string == defaultValueProvider.charSequence
+            anEnum == AnEnum.FOO
         }
     }
 
@@ -71,6 +73,7 @@ class PojofillSpec extends Specification {
             floats.length == 1
             doubles.length == 1
             strings.length == 1
+            anEnums.length == 1
         }
         instance.with {
             booleans[0] == defaultValueProvider.boolean
@@ -82,6 +85,7 @@ class PojofillSpec extends Specification {
             floats[0] == defaultValueProvider.float
             doubles[0] == defaultValueProvider.double
             strings[0] == defaultValueProvider.charSequence
+            anEnums[0] == AnEnum.FOO
         }
     }
 
@@ -101,6 +105,7 @@ class PojofillSpec extends Specification {
             floats.length == 1
             doubles.length == 1
             strings.length == 1
+            anEnums.length == 1
         }
         instance.with {
             booleans[0] == defaultValueProvider.boolean
@@ -112,6 +117,7 @@ class PojofillSpec extends Specification {
             floats[0] == defaultValueProvider.float
             doubles[0] == defaultValueProvider.double
             strings[0] == defaultValueProvider.charSequence
+            anEnums[0] == AnEnum.FOO
         }
     }
 
@@ -132,6 +138,7 @@ class PojofillSpec extends Specification {
             aFloat == defaultValueProvider.float
             aDouble == defaultValueProvider.double
             string == defaultValueProvider.charSequence
+            anEnum == AnEnum.FOO
         }
 
         instance.finalPrimitives.with {
@@ -144,6 +151,7 @@ class PojofillSpec extends Specification {
             aFloat == defaultValueProvider.float
             aDouble == defaultValueProvider.double
             string == defaultValueProvider.charSequence
+            anEnum == AnEnum.FOO
         }
 
         instance.primitiveArrays.with {
@@ -156,6 +164,7 @@ class PojofillSpec extends Specification {
             floats.length == 1
             doubles.length == 1
             strings.length == 1
+            anEnums.length == 1
         }
         instance.primitiveArrays.with {
             booleans[0] == defaultValueProvider.boolean
@@ -167,6 +176,7 @@ class PojofillSpec extends Specification {
             floats[0] == defaultValueProvider.float
             doubles[0] == defaultValueProvider.double
             strings[0] == defaultValueProvider.charSequence
+            anEnums[0] == AnEnum.FOO
         }
 
         instance.finalPrimitiveArrays.with {
@@ -179,6 +189,7 @@ class PojofillSpec extends Specification {
             floats.length == 1
             doubles.length == 1
             strings.length == 1
+            anEnums.length == 1
         }
         instance.finalPrimitiveArrays.with {
             booleans[0] == defaultValueProvider.boolean
@@ -190,6 +201,7 @@ class PojofillSpec extends Specification {
             floats[0] == defaultValueProvider.float
             doubles[0] == defaultValueProvider.double
             strings[0] == defaultValueProvider.charSequence
+            anEnums[0] == AnEnum.FOO
         }
     }
 
@@ -210,6 +222,7 @@ class PojofillSpec extends Specification {
             aFloat == defaultValueProvider.float
             aDouble == defaultValueProvider.double
             string == defaultValueProvider.charSequence
+            anEnum == AnEnum.FOO
         }
 
         instance.finalPrimitives.with {
@@ -222,6 +235,7 @@ class PojofillSpec extends Specification {
             aFloat == defaultValueProvider.float
             aDouble == defaultValueProvider.double
             string == defaultValueProvider.charSequence
+            anEnum == AnEnum.FOO
         }
 
         instance.primitiveArrays.with {
@@ -234,6 +248,7 @@ class PojofillSpec extends Specification {
             floats.length == 1
             doubles.length == 1
             strings.length == 1
+            anEnums.length == 1
         }
         instance.primitiveArrays.with {
             booleans[0] == defaultValueProvider.boolean
@@ -245,6 +260,7 @@ class PojofillSpec extends Specification {
             floats[0] == defaultValueProvider.float
             doubles[0] == defaultValueProvider.double
             strings[0] == defaultValueProvider.charSequence
+            anEnums[0] == AnEnum.FOO
         }
 
         instance.finalPrimitiveArrays.with {
@@ -257,6 +273,7 @@ class PojofillSpec extends Specification {
             floats.length == 1
             doubles.length == 1
             strings.length == 1
+            anEnums.length == 1
         }
         instance.finalPrimitiveArrays.with {
             booleans[0] == defaultValueProvider.boolean
@@ -268,6 +285,7 @@ class PojofillSpec extends Specification {
             floats[0] == defaultValueProvider.float
             doubles[0] == defaultValueProvider.double
             strings[0] == defaultValueProvider.charSequence
+            anEnums[0] == AnEnum.FOO
         }
     }
 

@@ -51,8 +51,12 @@ public class Pojofill {
         } else if (CharSequence.class.isAssignableFrom(clazz)) {
             return (T) valueProvider.getCharSequence();
         } else if (clazz.isEnum()) {
-            // Not implemented yet
-            return null;
+            val enumConstants = clazz.getEnumConstants();
+            if (enumConstants.length > 0) {
+                return enumConstants[0];
+            } else {
+                return null;
+            }
         } else if (clazz.isArray()) {
             val componentType = clazz.getComponentType();
             try {

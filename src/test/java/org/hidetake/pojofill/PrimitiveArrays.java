@@ -15,4 +15,5 @@ public class PrimitiveArrays {
     private float[] floats;
     private double[] doubles;
     private String[] strings;
+    private AnEnum[] anEnums;
 }

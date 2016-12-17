@@ -15,4 +15,5 @@ public class Primitives {
     private float aFloat;
     private double aDouble;
     private String string;
+    private AnEnum anEnum;
 }

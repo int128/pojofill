@@ -15,4 +15,5 @@ public class FinalPrimitives {
     private final float aFloat;
     private final double aDouble;
     private final String string;
+    private final AnEnum anEnum;
 }
