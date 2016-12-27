@@ -12,14 +12,17 @@ class PojofillSpec extends Specification {
         pojofill = new Pojofill()
     }
 
-    def 'newInstance(null) should return null'() {
-        expect:
-        pojofill.newInstance(null) == null
+    def 'newInstance(null) should throw NPE'() {
+        when:
+        pojofill.newInstance(null)
+
+        then:
+        thrown(NullPointerException)
     }
 
     def 'newInstance(class with primitive setters) should return an object'() {
         when:
-        def instance = pojofill.newInstance(Primitives)
+        def instance = pojofill.newInstance(Primitives).get()
 
         then:
         instance instanceof Primitives
@@ -39,7 +42,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive constructors) should return an object'() {
         when:
-        def instance = pojofill.newInstance(FinalPrimitives)
+        def instance = pojofill.newInstance(FinalPrimitives).get()
 
         then:
         instance instanceof FinalPrimitives
@@ -59,7 +62,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive array setters) should return an object'() {
         when:
-        def instance = pojofill.newInstance(PrimitiveArrays)
+        def instance = pojofill.newInstance(PrimitiveArrays).get()
 
         then:
         instance instanceof PrimitiveArrays
@@ -91,7 +94,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive array constructors) should return an object'() {
         when:
-        def instance = pojofill.newInstance(FinalPrimitiveArrays)
+        def instance = pojofill.newInstance(FinalPrimitiveArrays).get()
 
         then:
         instance instanceof FinalPrimitiveArrays
@@ -123,7 +126,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(composite of primitives) should return an object'() {
         when:
-        def instance = pojofill.newInstance(CompositeOfPrimitives)
+        def instance = pojofill.newInstance(CompositeOfPrimitives).get()
 
         then:
         instance instanceof CompositeOfPrimitives
@@ -203,11 +206,16 @@ class PojofillSpec extends Specification {
             strings[0] == defaultValueProvider.charSequence
             anEnums[0] == AnEnum.FOO
         }
+
+        instance.anInterface == null
+        instance.anAbstractClass == null
+        instance.anInterfaces.length == 0
+        instance.anAbstractClasses.length == 0
     }
 
     def 'newInstance(final composite class) should return an object'() {
         when:
-        def instance = pojofill.newInstance(FinalCompositeOfPrimitives)
+        def instance = pojofill.newInstance(FinalCompositeOfPrimitives).get()
 
         then:
         instance instanceof FinalCompositeOfPrimitives
@@ -287,6 +295,11 @@ class PojofillSpec extends Specification {
             strings[0] == defaultValueProvider.charSequence
             anEnums[0] == AnEnum.FOO
         }
+
+        instance.anInterface == null
+        instance.anAbstractClass == null
+        instance.anInterfaces.length == 0
+        instance.anAbstractClasses.length == 0
     }
 
 }

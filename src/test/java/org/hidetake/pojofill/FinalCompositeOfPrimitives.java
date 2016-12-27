@@ -10,4 +10,9 @@ public class FinalCompositeOfPrimitives {
     private final FinalPrimitives finalPrimitives;
     private final PrimitiveArrays primitiveArrays;
     private final FinalPrimitiveArrays finalPrimitiveArrays;
+
+    private final AnInterface anInterface;
+    private final AnAbstractClass anAbstractClass;
+    private final AnInterface[] anInterfaces;
+    private final AnAbstractClass[] anAbstractClasses;
 }
