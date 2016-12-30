@@ -1,4 +1,4 @@
-package org.hidetake.pojofill;
+package org.hidetake.pojofill.fixture;
 
 import lombok.Getter;
 import lombok.Setter;

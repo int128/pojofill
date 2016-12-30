@@ -1,4 +1,4 @@
-package org.hidetake.pojofill;
+package org.hidetake.pojofill.fixture;
 
 public enum AnEnum {
     FOO,
