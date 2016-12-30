@@ -1,5 +1,10 @@
 package org.hidetake.pojofill;
 
+/**
+ * A class providing value for instantiation.
+ *
+ * @author Hidetake Iwata
+ */
 public class ValueProvider {
     public Boolean getBoolean() {
         return true;

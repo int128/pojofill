@@ -23,7 +23,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive setters) should return an object'() {
         when:
-        def instance = pojofill.newInstance(Primitives).get()
+        def instance = pojofill.newInstanceOrNull(Primitives)
 
         then:
         instance instanceof Primitives
@@ -43,7 +43,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive constructors) should return an object'() {
         when:
-        def instance = pojofill.newInstance(FinalPrimitives).get()
+        def instance = pojofill.newInstanceOrNull(FinalPrimitives)
 
         then:
         instance instanceof FinalPrimitives
@@ -63,7 +63,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive array setters) should return an object'() {
         when:
-        def instance = pojofill.newInstance(PrimitiveArrays).get()
+        def instance = pojofill.newInstanceOrNull(PrimitiveArrays)
 
         then:
         instance instanceof PrimitiveArrays
@@ -95,7 +95,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(class with primitive array constructors) should return an object'() {
         when:
-        def instance = pojofill.newInstance(FinalPrimitiveArrays).get()
+        def instance = pojofill.newInstanceOrNull(FinalPrimitiveArrays)
 
         then:
         instance instanceof FinalPrimitiveArrays
@@ -127,7 +127,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(composite of primitives) should return an object'() {
         when:
-        def instance = pojofill.newInstance(CompositeOfPrimitives).get()
+        def instance = pojofill.newInstanceOrNull(CompositeOfPrimitives)
 
         then:
         instance instanceof CompositeOfPrimitives
@@ -216,7 +216,7 @@ class PojofillSpec extends Specification {
 
     def 'newInstance(final composite class) should return an object'() {
         when:
-        def instance = pojofill.newInstance(FinalCompositeOfPrimitives).get()
+        def instance = pojofill.newInstanceOrNull(FinalCompositeOfPrimitives)
 
         then:
         instance instanceof FinalCompositeOfPrimitives
