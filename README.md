@@ -1,4 +1,4 @@
-# Pojofill
+# Pojofill [![CircleCI](https://circleci.com/gh/int128/pojofill.svg?style=shield)](https://circleci.com/gh/int128/pojofill)
 
 This is a library to instantiate a POJO (Plain Old Java Object) filled with example values.
 Useful for test double.

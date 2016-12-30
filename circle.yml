@@ -1,0 +1,21 @@
+machine:
+  java:
+    version: openjdk8
+  environment:
+    TERM: dumb
+    GRADLE_OPTS: -Xmx1g -Xms1g
+
+test:
+  post:
+    - |
+      cp -a build/test-results/test/*.xml $CIRCLE_TEST_REPORTS/
+      cp -a build/reports $CIRCLE_ARTIFACTS/
+
+deployment:
+  release:
+    tag: /[0-9]+(\.[0-9]+)*/
+    commands:
+      - |
+        if [ "$BINTRAY_KEY" ]; then
+          ./gradlew bintrayUpload
+        fi
