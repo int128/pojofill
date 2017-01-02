@@ -3,6 +3,7 @@ package org.hidetake.pojofill;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.hidetake.pojofill.context.InstantiationContext;
 
 import java.lang.reflect.Type;
@@ -37,12 +38,25 @@ public class Instantiator {
      * @param <T> type of the class
      * @return an instance or {@link Optional#empty()} if error occurred
      */
-    @SuppressWarnings("unchecked")
     public <T> Optional<T> newInstance(Class<T> clazz, Type genericParameterType, InstantiationContext context) {
         if (clazz == null) {
-            throw new NullPointerException();
-        } else if (clazz == void.class || Void.class.isAssignableFrom(clazz)) {
-            log.debug("Could not instantiate class: {}", clazz);
+            throw new NullPointerException("Class parameter must not be null");
+        }
+        if (context == null) {
+            throw new NullPointerException("InstantiationContext parameter must not be null");
+        }
+
+        log.trace("Instantiating {} for {}", clazz, context);
+        val instance = newInstanceInternal(clazz, genericParameterType, context);
+        if (!instance.isPresent()) {
+            log.debug("Could not instantiate {} for {}", clazz, context);
+        }
+        return instance;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> Optional<T> newInstanceInternal(Class<T> clazz, Type genericParameterType, InstantiationContext context) {
+        if (clazz == void.class || Void.class.isAssignableFrom(clazz)) {
             return empty();
         } else if (clazz == boolean.class || Boolean.class.isAssignableFrom(clazz)) {
             return of((T) valueProvider.getBoolean(context));

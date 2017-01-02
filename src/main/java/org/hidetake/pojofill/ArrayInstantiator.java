@@ -31,23 +31,20 @@ public class ArrayInstantiator {
     public <T> T newInstance(Class<T> clazz) {
         val context = new ArrayElement(clazz);
         val componentType = clazz.getComponentType();
-        log.trace("Instantiating array of {}", componentType);
         return instantiator.newInstance(componentType, null, context).flatMap(instance -> {
             try {
+                log.trace("Calling constructor of {}", clazz);
                 val array = (T) Array.newInstance(componentType, 1);
+                log.trace("Calling setter of {} with {}", clazz, instance);
                 Array.set(array, 0, instance);
                 return of(array);
             } catch (IllegalArgumentException e) {
-                log.debug("Could not instantiate array component: ", componentType, e);
+                log.debug("Could not call setter for {}", context, e);
                 return empty();
             }
-        }).orElseGet(() -> newEmptyArray(clazz));
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> T newEmptyArray(Class<T> arrayClass) {
-        val componentType = arrayClass.getComponentType();
-        log.trace("Instantiating empty array of {}", componentType);
-        return (T) Array.newInstance(componentType, 0);
+        }).orElseGet(() -> {
+            log.debug("Fallback to empty array for {}", context);
+            return (T) Array.newInstance(componentType, 0);
+        });
     }
 }

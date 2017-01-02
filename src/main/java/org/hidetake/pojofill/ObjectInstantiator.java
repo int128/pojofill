@@ -55,7 +55,6 @@ public class ObjectInstantiator {
             .sorted(comparingInt(Constructor::getParameterCount))
             .sorted(reverseOrder())
             .flatMap(constructor -> {
-                log.trace("Trying constructor: {}", constructor);
                 val arguments = range(0, constructor.getParameterCount())
                     .mapToObj(index -> {
                         val parameter = constructor.getParameters()[index];
@@ -66,10 +65,10 @@ public class ObjectInstantiator {
                     .toArray();
 
                 try {
-                    log.trace("Invoking constructor: {} with {}", constructor, arguments);
+                    log.trace("Calling constructor {} with {}", constructor, arguments);
                     return Stream.of((T) constructor.newInstance(arguments));
                 } catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    log.debug("Could not invoke constructor: {} with {}", constructor, arguments, e);
+                    log.debug("Could not call constructor {} with {}", constructor, arguments, e);
                     return Stream.empty();
                 }
             })
@@ -81,10 +80,10 @@ public class ObjectInstantiator {
                         val context = new SetterArgument(setter, parameter);
                         instantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context).map((argument) -> {
                             try {
-                                log.trace("Invoking setter: {} with {}", setter, argument);
+                                log.trace("Calling setter {} with {}", setter, argument);
                                 setter.invoke(instance, argument);
                             } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-                                log.debug("Could not invoke setter: {} with {}", setter, argument, e);
+                                log.debug("Could not call setter {} with {}", setter, argument, e);
                             }
                             return null;
                         });

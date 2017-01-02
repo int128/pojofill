@@ -7,6 +7,7 @@ import org.hidetake.pojofill.context.CollectionElement;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -44,11 +45,11 @@ public class CollectionInstantiator {
                         .map(Collections::singletonList)
                         .orElseGet(Collections::emptyList);
                 } catch (ClassNotFoundException e) {
-                    log.debug("Could not instantiate element {} of {}", elementType, genericParameterType);
+                    log.debug("Fallback to empty collection for {}", context, e);
                     return emptyList();
                 }
             } else {
-                log.debug("Could not infer element type: {}", genericParameterType);
+                log.debug("Could not infer element type from type arguments {}", Arrays.toString(actualTypeArguments));
                 return emptyList();
             }
         } else {
