@@ -1,18 +1,20 @@
 # Pojofill [![CircleCI](https://circleci.com/gh/int128/pojofill.svg?style=shield)](https://circleci.com/gh/int128/pojofill)
 
-This is a library to instantiate a POJO (Plain Old Java Object) filled with example values.
-Useful for test double.
+This is a library to instantiate a POJO (Plain Old Java Object) filled with generated values.
+It is useful for building test double.
 
 
 ## Getting Started
 
-Add the dependency.
+Dependencies:
 
 ```groovy
+// build.gradle
 compile 'org.hidetake:pojofill:1.0.0'
 ```
 
 ```xml
+<!-- pom.xml -->
 <dependency>
   <groupId>org.hidetake</groupId>
   <artifactId>pojofill</artifactId>
@@ -81,23 +83,6 @@ The method returns `Optional.empty()` if one of following is given:
 - Abstract class or interface
 
 
-## How works
-
-If a class is given, the method tries to instantiate an object by following steps.
-
-1. Instantiate an object.
-  1. Find a constructor with the longest parameters.
-  1. Instantiate arguments for the constructor. If any argument could not be instantiated, try the next constructor.
-  1. Invoke the constructor with arguments. If it failed, try the next constructor.
-  1. If no more constructor left, the method fails.
-1. Invoke setters.
-  1. Find a setter method of the object.
-  1. Instantiate an argument for the setter. If the argument could not instantiated, ignore the setter.
-  1. Invoke the setter with the argument. If it failed, ignore the setter.
-  1. Try the next setter.
-1. Return the object.
-
-
 ## Custom value provider
 
 `Pojofill` class accepts a custom value provider on the constructor.
@@ -125,13 +110,20 @@ Instantiating an array element            | `ArrayElement`
 Instantiating an collection element       | `CollectionElement`
 
 
-# Contributions
+## Logging
+
+Pojofill depends on SLF4J.
+It describes error messages in the `DEBUG` level and trace messages in the `TRACE` level.
+Tested with Logback.
+
+
+## Contributions
 
 This is an open source software licensed under the Apache License Version 2.0.
 Feel free to open issues or pull requests.
 
 ```
-Copyright 2016 Hidetake Iwata
+Copyright 2016-2017 Hidetake Iwata
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
