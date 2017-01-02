@@ -3,6 +3,7 @@ package org.hidetake.pojofill;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hidetake.pojofill.context.InstantiationContext;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -31,46 +32,36 @@ public class Instantiator {
      * Create an new instance.
      *
      * @param clazz class to instantiate
-     * @param <T> type of the class
-     * @return an instance or {@link Optional#empty()} if error occurred
-     */
-    public <T> Optional<T> newInstance(Class<T> clazz) {
-        return newInstance(clazz, null);
-    }
-
-    /**
-     * Create an new instance.
-     *
-     * @param clazz class to instantiate
      * @param genericParameterType type parameter of the collection class (or null)
+     * @param context instantiation context
      * @param <T> type of the class
      * @return an instance or {@link Optional#empty()} if error occurred
      */
     @SuppressWarnings("unchecked")
-    public <T> Optional<T> newInstance(Class<T> clazz, Type genericParameterType) {
+    public <T> Optional<T> newInstance(Class<T> clazz, Type genericParameterType, InstantiationContext context) {
         if (clazz == null) {
             throw new NullPointerException();
         } else if (clazz == void.class || Void.class.isAssignableFrom(clazz)) {
             log.debug("Could not instantiate class: {}", clazz);
             return empty();
         } else if (clazz == boolean.class || Boolean.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getBoolean());
+            return of((T) valueProvider.getBoolean(context));
         } else if (clazz == byte.class || Byte.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getByte());
+            return of((T) valueProvider.getByte(context));
         } else if (clazz == char.class || Character.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getCharacter());
+            return of((T) valueProvider.getCharacter(context));
         } else if (clazz == short.class || Short.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getShort());
+            return of((T) valueProvider.getShort(context));
         } else if (clazz == int.class || Integer.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getInteger());
+            return of((T) valueProvider.getInteger(context));
         } else if (clazz == long.class || Long.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getLong());
+            return of((T) valueProvider.getLong(context));
         } else if (clazz == float.class || Float.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getFloat());
+            return of((T) valueProvider.getFloat(context));
         } else if (clazz == double.class || Double.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getDouble());
+            return of((T) valueProvider.getDouble(context));
         } else if (CharSequence.class.isAssignableFrom(clazz)) {
-            return of((T) valueProvider.getCharSequence());
+            return of((T) valueProvider.getCharSequence(context));
         } else if (Collection.class.isAssignableFrom(clazz)) {
             return of((T) collectionInstantiator.newInstance(clazz, genericParameterType));
         } else if (clazz.isArray()) {

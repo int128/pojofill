@@ -1,44 +1,73 @@
 package org.hidetake.pojofill;
 
+import org.hidetake.pojofill.context.InstantiationContext;
+
 /**
- * A class providing value for instantiation.
+ * An interface for providing value for instantiation.
  *
  * @author Hidetake Iwata
  */
-public class ValueProvider {
-    public Boolean getBoolean() {
-        return true;
-    }
+public interface ValueProvider {
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Boolean getBoolean(InstantiationContext context);
 
-    public Byte getByte() {
-        return 123;
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Byte getByte(InstantiationContext context);
 
-    public Character getCharacter() {
-        return 'a';
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Character getCharacter(InstantiationContext context);
 
-    public Short getShort() {
-        return 12345;
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Short getShort(InstantiationContext context);
 
-    public Integer getInteger() {
-        return 123456;
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Integer getInteger(InstantiationContext context);
 
-    public Long getLong() {
-        return 1234567890L;
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Long getLong(InstantiationContext context);
 
-    public Float getFloat() {
-        return 1.23456f;
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Float getFloat(InstantiationContext context);
 
-    public Double getDouble() {
-        return 1.23456;
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    Double getDouble(InstantiationContext context);
 
-    public CharSequence getCharSequence() {
-        return "abcde";
-    }
+    /**
+     * Provide the value.
+     * @param context instantiation context (or null if it is not member of a class)
+     * @return the value
+     */
+    CharSequence getCharSequence(InstantiationContext context);
 }

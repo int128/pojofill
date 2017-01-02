@@ -2,6 +2,7 @@ package org.hidetake.pojofill;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hidetake.pojofill.context.TopLevel;
 
 import java.util.Optional;
 
@@ -13,8 +14,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Getter
 public class Pojofill {
-    private final ValueProvider valueProvider = new ValueProvider();
+    private final ValueProvider valueProvider = new DefaultValueProvider();
     private final Instantiator instantiator = new Instantiator(valueProvider);
+
+    private static final TopLevel TOP_LEVEL = new TopLevel();
 
     /**
      * Create an new instance.
@@ -24,7 +27,7 @@ public class Pojofill {
      * @return an instance or {@link Optional#empty()} if error occurred
      */
     public <T> Optional<T> newInstance(Class<T> clazz) {
-        return instantiator.newInstance(clazz);
+        return instantiator.newInstance(clazz, null, TOP_LEVEL);
     }
 
     /**
@@ -35,6 +38,6 @@ public class Pojofill {
      * @return an instance or null if error occurred
      */
     public <T> T newInstanceOrNull(Class<T> clazz) {
-        return instantiator.newInstance(clazz).orElse(null);
+        return newInstance(clazz).orElse(null);
     }
 }

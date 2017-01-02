@@ -98,13 +98,13 @@ If a class is given, the method tries to instantiate an object by following step
 1. Return the object.
 
 
-## Value provider
+## Custom value provider
 
 `Pojofill` class accepts a custom value provider on the constructor.
 
 ```java
-class MyValueProvider extends ValueProvider {
-  public CharSequence getCharSequence() {
+class MyValueProvider extends DefaultValueProvider {
+  public CharSequence getCharSequence(InstantiationContext context) {
     return "my custom string";
   }
 }
@@ -114,7 +114,15 @@ class Example {
 }
 ```
 
-`ValueProvider` specification may be changed in the future release.
+An actual type of `InstantiationContext` should be determined by the context as follows:
+
+Context                                   | Actual type
+------------------------------------------|------------
+Given in the method of `Pojofill` class   | `TopLevel`
+Instantiating a constructor argument      | `ConstructorArgument`
+Instantiating a setter argument           | `SetterArgument`
+Instantiating an array element            | `ArrayElement`
+Instantiating an collection element       | `CollectionElement`
 
 
 # Contributions

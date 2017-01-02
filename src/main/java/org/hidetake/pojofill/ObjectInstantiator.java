@@ -3,6 +3,8 @@ package org.hidetake.pojofill;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.hidetake.pojofill.context.ConstructorArgument;
+import org.hidetake.pojofill.context.SetterArgument;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -56,9 +58,9 @@ public class ObjectInstantiator {
                 log.trace("Trying constructor: {}", constructor);
                 val arguments = range(0, constructor.getParameterCount())
                     .mapToObj(index -> {
-                        val parameterClass = constructor.getParameterTypes()[index];
-                        val parameterType = constructor.getGenericParameterTypes()[index];
-                        return instantiator.newInstance(parameterClass, parameterType);
+                        val parameter = constructor.getParameters()[index];
+                        val context = new ConstructorArgument(constructor, parameter);
+                        return instantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context);
                     })
                     .map(argument -> argument.orElse(null))
                     .toArray();
@@ -75,14 +77,14 @@ public class ObjectInstantiator {
                 Stream.of(clazz.getMethods())
                     .filter(SETTER_PREDICATE)
                     .forEach(setter -> {
-                        val parameterClass = setter.getParameterTypes()[0];
-                        val parameterType = setter.getGenericParameterTypes()[0];
-                        instantiator.newInstance(parameterClass, parameterType).map((parameter) -> {
+                        val parameter = setter.getParameters()[0];
+                        val context = new SetterArgument(setter, parameter);
+                        instantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context).map((argument) -> {
                             try {
-                                log.trace("Invoking setter: {} with {}", setter, parameterType);
-                                setter.invoke(instance, parameter);
+                                log.trace("Invoking setter: {} with {}", setter, argument);
+                                setter.invoke(instance, argument);
                             } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-                                log.debug("Could not invoke setter: {} with {}", setter, parameterType, e);
+                                log.debug("Could not invoke setter: {} with {}", setter, argument, e);
                             }
                             return null;
                         });

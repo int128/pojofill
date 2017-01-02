@@ -3,6 +3,7 @@ package org.hidetake.pojofill;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.hidetake.pojofill.context.ArrayElement;
 
 import java.lang.reflect.Array;
 
@@ -28,9 +29,10 @@ public class ArrayInstantiator {
      */
     @SuppressWarnings("unchecked")
     public <T> T newInstance(Class<T> clazz) {
+        val context = new ArrayElement(clazz);
         val componentType = clazz.getComponentType();
         log.trace("Instantiating array of {}", componentType);
-        return instantiator.newInstance(componentType).flatMap(instance -> {
+        return instantiator.newInstance(componentType, null, context).flatMap(instance -> {
             try {
                 val array = (T) Array.newInstance(componentType, 1);
                 Array.set(array, 0, instance);

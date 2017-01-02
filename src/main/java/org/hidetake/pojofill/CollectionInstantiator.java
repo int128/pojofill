@@ -3,6 +3,7 @@ package org.hidetake.pojofill;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.hidetake.pojofill.context.CollectionElement;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -35,9 +36,10 @@ public class CollectionInstantiator {
             val actualTypeArguments = parameterizedType.getActualTypeArguments();
             if (actualTypeArguments.length == 1) {
                 val elementType = actualTypeArguments[0];
+                val context = new CollectionElement(clazz, parameterizedType);
                 try {
                     val elementClass = Class.forName(elementType.getTypeName());
-                    val element = instantiator.newInstance(elementClass);
+                    val element = instantiator.newInstance(elementClass, null, context);
                     return element
                         .map(Collections::singletonList)
                         .orElseGet(Collections::emptyList);
