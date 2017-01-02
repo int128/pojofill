@@ -51,11 +51,11 @@ Person(id=123456, name=abcde)
 ```
 
 
-## How works
+## Specification
 
-`Pojofill#newInstance()` method accepts a class `T` and returns an instance wrapped with `Optional<T>`.
+`Pojofill#newInstance()` method accepts a type `T` and returns an instance wrapped with `Optional<T>`.
 
-Given class               | Generated instance
+Given type                | Generated instance
 --------------------------|-------------------
 `boolean`                 | true
 `byte`                    | 123
@@ -67,30 +67,35 @@ Given class               | Generated instance
 `double`                  | 1.23456
 `CharSequence` (`String`) | `abcde`
 `enum`                    | the first constant
-`Collection<E>`           | a `List` with 1 element (or empty `List` if it could not instantiate `E`)
-Array of `E`              | an array with 1 element (or empty array if it could not instantiate `E`)
-Class                     | an object filled with value(s)
+`Collection<E>`           | a `List` with an `E` instantiated recursively (or empty `List` if it failed)
+Array of `E`              | an array with an `E` instantiated recursively (or empty array if it failed)
+Class                     | an object
 
-If one of following is given, the method fails and returns `Optional.empty()`.
+If a class is given, the method tries to instantiate an object of the class.
+Members of the class are recursively initialized by the constructor and setters.
+
+The method returns `Optional.empty()` if one of following is given:
 
 - `void`
-- Abstract class
-- Interface
 - Class without any public constructor
+- Abstract class or interface
 
-If a class is given, the method tries to instantiate an object.
 
-- Instantiation
+## How works
+
+If a class is given, the method tries to instantiate an object by following steps.
+
+1. Instantiate an object.
   1. Find a constructor with the longest parameters.
-  1. Instantiate arguments for the constructor.
-     If any argument could not be instantiated, try the next longest constructor.
-  1. Invoke the constructor with arguments.
+  1. Instantiate arguments for the constructor. If any argument could not be instantiated, try the next constructor.
+  1. Invoke the constructor with arguments. If it failed, try the next constructor.
   1. If no more constructor left, the method fails.
-- Value assignment
+1. Invoke setters.
   1. Find a setter method of the object.
-  1. Instantiate an argument for the setter. If the argument could not instantiated, ignore this setter.
-  1. Invoke the setter with the argument.
-- Returning the object
+  1. Instantiate an argument for the setter. If the argument could not instantiated, ignore the setter.
+  1. Invoke the setter with the argument. If it failed, ignore the setter.
+  1. Try the next setter.
+1. Return the object.
 
 
 ## Value provider
