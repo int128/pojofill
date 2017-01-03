@@ -95,7 +95,10 @@ class MyValueProvider extends DefaultValueProvider {
 }
 
 class Example {
-  Pojofill pojofill = new Pojofill(new MyValueProvider());
+  public void main() {
+    Pojofill pojofill = new Pojofill();
+    pojofill.getRootInstantiator().addInstantiator(new PrimitiveInstantiator(new MyValueProvider()));
+  }
 }
 ```
 

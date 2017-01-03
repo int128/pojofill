@@ -1,35 +1,42 @@
-package org.hidetake.pojofill;
+package org.hidetake.pojofill.instantiator;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.hidetake.pojofill.RootInstantiator;
 import org.hidetake.pojofill.context.CollectionElement;
+import org.hidetake.pojofill.context.InstantiationContext;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 import static java.util.Collections.emptyList;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 /**
- * A class to instantiate a collection class.
+ * A class to instantiate a collection.
  *
  * @author Hidetake Iwata
  */
 @Slf4j
 @RequiredArgsConstructor
-public class CollectionInstantiator {
-    private final Instantiator instantiator;
+public class CollectionInstantiator implements Instantiator {
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Optional<T> newInstance(RootInstantiator rootInstantiator, Class<T> clazz, Type genericParameterType, InstantiationContext context) {
+        if (Collection.class.isAssignableFrom(clazz)) {
+            return of((T) newCollection(rootInstantiator, clazz, genericParameterType));
+        } else {
+            return empty();
+        }
+    }
 
-    /**
-     * Create an new instance.
-     *
-     * @param clazz class to instantiate
-     * @return a list with 1 element or empty list if error occurred
-     */
-    public Collection<?> newInstance(Class<?> clazz, Type genericParameterType) {
+    private Collection<?> newCollection(RootInstantiator rootInstantiator, Class<?> clazz, Type genericParameterType) {
         if (clazz == Object.class) {
             return emptyList();
         } else if (genericParameterType instanceof ParameterizedType) {
@@ -40,7 +47,7 @@ public class CollectionInstantiator {
                 val context = new CollectionElement(clazz, parameterizedType);
                 try {
                     val elementClass = Class.forName(elementType.getTypeName());
-                    val element = instantiator.newInstance(elementClass, null, context);
+                    val element = rootInstantiator.newInstance(elementClass, null, context);
                     return element
                         .map(Collections::singletonList)
                         .orElseGet(Collections::emptyList);
@@ -54,7 +61,7 @@ public class CollectionInstantiator {
             }
         } else {
             log.trace("Finding generic type in super class of {}", clazz);
-            return newInstance(clazz.getSuperclass(), clazz.getGenericSuperclass());
+            return newCollection(rootInstantiator, clazz.getSuperclass(), clazz.getGenericSuperclass());
         }
     }
 }

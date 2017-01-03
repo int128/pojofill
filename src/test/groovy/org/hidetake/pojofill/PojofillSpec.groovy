@@ -1,6 +1,7 @@
 package org.hidetake.pojofill
 
 import org.hidetake.pojofill.fixture.*
+import org.hidetake.pojofill.instantiator.DefaultValueProvider
 import spock.lang.Specification
 
 class PojofillSpec extends Specification {

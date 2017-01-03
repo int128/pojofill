@@ -1,4 +1,4 @@
-package org.hidetake.pojofill;
+package org.hidetake.pojofill.instantiator;
 
 import org.hidetake.pojofill.context.InstantiationContext;
 

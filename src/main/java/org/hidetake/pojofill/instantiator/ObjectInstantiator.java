@@ -1,15 +1,14 @@
-package org.hidetake.pojofill;
+package org.hidetake.pojofill.instantiator;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.hidetake.pojofill.RootInstantiator;
 import org.hidetake.pojofill.context.ConstructorArgument;
+import org.hidetake.pojofill.context.InstantiationContext;
 import org.hidetake.pojofill.context.SetterArgument;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -27,24 +26,20 @@ import static java.util.stream.IntStream.range;
  */
 @Slf4j
 @RequiredArgsConstructor
-public class ObjectInstantiator {
-    private final Instantiator instantiator;
-
+public class ObjectInstantiator implements Instantiator {
     private static final Predicate<Constructor> CONSTRUCTOR_PREDICATE = (Constructor constructor) ->
         Modifier.isPublic(constructor.getModifiers());
 
     private static final Predicate<Method> SETTER_PREDICATE = (Method method) ->
         method.getName().startsWith("set") && method.getParameterCount() == 1 && Modifier.isPublic(method.getModifiers());
 
-    /**
-     * Create an new object.
-     *
-     * @param clazz class to instantiate
-     * @param <T> type of the class
-     * @return an instance or {@link Optional#empty()} if error occurred
-     */
+    @Override
+    public <T> Optional<T> newInstance(RootInstantiator rootInstantiator, Class<T> clazz, Type genericParameterType, InstantiationContext context) {
+        return newObject(rootInstantiator, clazz);
+    }
+
     @SuppressWarnings("unchecked")
-    public <T> Optional<T> newInstance(Class<T> clazz) {
+    private <T> Optional<T> newObject(RootInstantiator rootInstantiator, Class<T> clazz) {
         if (isAbstract(clazz.getModifiers())) {
             log.debug("Could not instantiate abstract class: {}", clazz);
             return empty();
@@ -59,7 +54,7 @@ public class ObjectInstantiator {
                     .mapToObj(index -> {
                         val parameter = constructor.getParameters()[index];
                         val context = new ConstructorArgument(constructor, parameter);
-                        return instantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context);
+                        return rootInstantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context);
                     })
                     .map(argument -> argument.orElse(null))
                     .toArray();
@@ -78,7 +73,7 @@ public class ObjectInstantiator {
                     .forEach(setter -> {
                         val parameter = setter.getParameters()[0];
                         val context = new SetterArgument(setter, parameter);
-                        instantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context).map((argument) -> {
+                        rootInstantiator.newInstance(parameter.getType(), parameter.getParameterizedType(), context).map((argument) -> {
                             try {
                                 log.trace("Calling setter {} with {}", setter, argument);
                                 setter.invoke(instance, argument);

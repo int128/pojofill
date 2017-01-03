@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Getter
 public class Pojofill {
-    private final ValueProvider valueProvider = new DefaultValueProvider();
-    private final Instantiator instantiator = new Instantiator(valueProvider);
+    private final RootInstantiator rootInstantiator = new RootInstantiator();
 
     private static final TopLevel TOP_LEVEL = new TopLevel();
 
@@ -27,7 +26,7 @@ public class Pojofill {
      * @return an instance or {@link Optional#empty()} if error occurred
      */
     public <T> Optional<T> newInstance(Class<T> clazz) {
-        return instantiator.newInstance(clazz, null, TOP_LEVEL);
+        return rootInstantiator.newInstance(clazz, null, TOP_LEVEL);
     }
 
     /**
