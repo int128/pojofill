@@ -1,7 +1,10 @@
 package org.hidetake.pojofill
 
+import org.hidetake.pojofill.context.InstantiationContext
+import org.hidetake.pojofill.context.SetterArgument
 import org.hidetake.pojofill.fixture.*
 import org.hidetake.pojofill.instantiator.DefaultValueProvider
+import org.hidetake.pojofill.instantiator.PrimitiveInstantiator
 import spock.lang.Specification
 
 class PojofillSpec extends Specification {
@@ -267,6 +270,41 @@ class PojofillSpec extends Specification {
         instance.anAbstractClass == null
         instance.anInterfaces.length == 0
         instance.anAbstractClasses.length == 0
+    }
+
+    def 'addInstantiator should add custom instantiator at first'() {
+        given:
+        pojofill.addInstantiator(new PrimitiveInstantiator(new DefaultValueProvider() {
+            @Override
+            Integer getInteger(InstantiationContext context) {
+                -100
+            }
+
+            @Override
+            CharSequence getCharSequence(InstantiationContext context) {
+                if (context instanceof SetterArgument) {
+                    context.setter.name
+                } else {
+                    super.getCharSequence(context)
+                }
+            }
+        }))
+
+        when:
+        def instance = pojofill.newInstanceOrNull(Primitives)
+
+        then:
+        instance instanceof Primitives
+        instance.aBoolean == defaultValueProvider.BOOLEAN
+        instance.aByte == defaultValueProvider.BYTE
+        instance.aChar == defaultValueProvider.CHAR
+        instance.aShort == defaultValueProvider.SHORT
+        instance.anInt == -100
+        instance.aLong == defaultValueProvider.LONG
+        instance.aFloat == defaultValueProvider.FLOAT
+        instance.aDouble == defaultValueProvider.DOUBLE
+        instance.string == 'setString'
+        instance.anEnum == AnEnum.FOO
     }
 
 }

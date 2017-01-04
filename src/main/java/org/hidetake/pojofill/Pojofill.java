@@ -3,6 +3,7 @@ package org.hidetake.pojofill;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hidetake.pojofill.context.TopLevel;
+import org.hidetake.pojofill.instantiator.Instantiator;
 
 import java.util.Optional;
 
@@ -38,5 +39,14 @@ public class Pojofill {
      */
     public <T> T newInstanceOrNull(Class<T> clazz) {
         return newInstance(clazz).orElse(null);
+    }
+
+    /**
+     * Add an {@link Instantiator} at first.
+     *
+     * @param instantiator an instantiator tried at first
+     */
+    public void addInstantiator(Instantiator instantiator) {
+        rootInstantiator.addInstantiator(instantiator);
     }
 }
