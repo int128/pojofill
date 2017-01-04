@@ -10,7 +10,7 @@ Dependencies:
 
 ```groovy
 // build.gradle
-compile 'org.hidetake:pojofill:1.1.0'
+compile 'org.hidetake:pojofill:1.2.0'
 ```
 
 ```xml
@@ -18,7 +18,7 @@ compile 'org.hidetake:pojofill:1.1.0'
 <dependency>
   <groupId>org.hidetake</groupId>
   <artifactId>pojofill</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <type>pom</type>
 </dependency>
 ```
