@@ -9,8 +9,6 @@ import spock.lang.Specification
 
 class PojofillSpec extends Specification {
 
-    static final defaultValueProvider = new DefaultValueProvider()
-
     Pojofill pojofill
 
     def setup() {
@@ -31,15 +29,15 @@ class PojofillSpec extends Specification {
 
         then:
         instance instanceof Primitives
-        instance.aBoolean == defaultValueProvider.BOOLEAN
-        instance.aByte == defaultValueProvider.BYTE
-        instance.aChar == defaultValueProvider.CHAR
-        instance.aShort == defaultValueProvider.SHORT
-        instance.anInt == defaultValueProvider.INT
-        instance.aLong == defaultValueProvider.LONG
-        instance.aFloat == defaultValueProvider.FLOAT
-        instance.aDouble == defaultValueProvider.DOUBLE
-        instance.string == defaultValueProvider.STRING
+        instance.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.aByte == DefaultValueProvider.BYTE
+        instance.aChar == DefaultValueProvider.CHAR
+        instance.aShort == DefaultValueProvider.SHORT
+        instance.anInt == DefaultValueProvider.INT
+        instance.aLong == DefaultValueProvider.LONG
+        instance.aFloat == DefaultValueProvider.FLOAT
+        instance.aDouble == DefaultValueProvider.DOUBLE
+        instance.string == DefaultValueProvider.STRING
         instance.anEnum == AnEnum.FOO
     }
 
@@ -49,15 +47,15 @@ class PojofillSpec extends Specification {
 
         then:
         instance instanceof FinalPrimitives
-        instance.aBoolean == defaultValueProvider.BOOLEAN
-        instance.aByte == defaultValueProvider.BYTE
-        instance.aChar == defaultValueProvider.CHAR
-        instance.aShort == defaultValueProvider.SHORT
-        instance.anInt == defaultValueProvider.INT
-        instance.aLong == defaultValueProvider.LONG
-        instance.aFloat == defaultValueProvider.FLOAT
-        instance.aDouble == defaultValueProvider.DOUBLE
-        instance.string == defaultValueProvider.STRING
+        instance.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.aByte == DefaultValueProvider.BYTE
+        instance.aChar == DefaultValueProvider.CHAR
+        instance.aShort == DefaultValueProvider.SHORT
+        instance.anInt == DefaultValueProvider.INT
+        instance.aLong == DefaultValueProvider.LONG
+        instance.aFloat == DefaultValueProvider.FLOAT
+        instance.aDouble == DefaultValueProvider.DOUBLE
+        instance.string == DefaultValueProvider.STRING
         instance.anEnum == AnEnum.FOO
     }
 
@@ -78,15 +76,15 @@ class PojofillSpec extends Specification {
         instance.strings.length == 1
         instance.anEnums.length == 1
 
-        instance.booleans[0] == defaultValueProvider.BOOLEAN
-        instance.bytes[0] == defaultValueProvider.BYTE
-        instance.chars[0] == defaultValueProvider.CHAR
-        instance.shorts[0] == defaultValueProvider.SHORT
-        instance.ints[0] == defaultValueProvider.INT
-        instance.longs[0] == defaultValueProvider.LONG
-        instance.floats[0] == defaultValueProvider.FLOAT
-        instance.doubles[0] == defaultValueProvider.DOUBLE
-        instance.strings[0] == defaultValueProvider.STRING
+        instance.booleans[0] == DefaultValueProvider.BOOLEAN
+        instance.bytes[0] == DefaultValueProvider.BYTE
+        instance.chars[0] == DefaultValueProvider.CHAR
+        instance.shorts[0] == DefaultValueProvider.SHORT
+        instance.ints[0] == DefaultValueProvider.INT
+        instance.longs[0] == DefaultValueProvider.LONG
+        instance.floats[0] == DefaultValueProvider.FLOAT
+        instance.doubles[0] == DefaultValueProvider.DOUBLE
+        instance.strings[0] == DefaultValueProvider.STRING
         instance.anEnums[0] == AnEnum.FOO
     }
 
@@ -106,15 +104,15 @@ class PojofillSpec extends Specification {
         instance.strings.length == 1
         instance.anEnums.length == 1
 
-        instance.booleans[0] == defaultValueProvider.BOOLEAN
-        instance.bytes[0] == defaultValueProvider.BYTE
-        instance.chars[0] == defaultValueProvider.CHAR
-        instance.shorts[0] == defaultValueProvider.SHORT
-        instance.ints[0] == defaultValueProvider.INT
-        instance.longs[0] == defaultValueProvider.LONG
-        instance.floats[0] == defaultValueProvider.FLOAT
-        instance.doubles[0] == defaultValueProvider.DOUBLE
-        instance.strings[0] == defaultValueProvider.STRING
+        instance.booleans[0] == DefaultValueProvider.BOOLEAN
+        instance.bytes[0] == DefaultValueProvider.BYTE
+        instance.chars[0] == DefaultValueProvider.CHAR
+        instance.shorts[0] == DefaultValueProvider.SHORT
+        instance.ints[0] == DefaultValueProvider.INT
+        instance.longs[0] == DefaultValueProvider.LONG
+        instance.floats[0] == DefaultValueProvider.FLOAT
+        instance.doubles[0] == DefaultValueProvider.DOUBLE
+        instance.strings[0] == DefaultValueProvider.STRING
         instance.anEnums[0] == AnEnum.FOO
     }
 
@@ -125,26 +123,26 @@ class PojofillSpec extends Specification {
         then:
         instance instanceof CompositeOfPrimitives
 
-        instance.primitives.aBoolean == defaultValueProvider.BOOLEAN
-        instance.primitives.aByte == defaultValueProvider.BYTE
-        instance.primitives.aChar == defaultValueProvider.CHAR
-        instance.primitives.aShort == defaultValueProvider.SHORT
-        instance.primitives.anInt == defaultValueProvider.INT
-        instance.primitives.aLong == defaultValueProvider.LONG
-        instance.primitives.aFloat == defaultValueProvider.FLOAT
-        instance.primitives.aDouble == defaultValueProvider.DOUBLE
-        instance.primitives.string == defaultValueProvider.STRING
+        instance.primitives.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.primitives.aByte == DefaultValueProvider.BYTE
+        instance.primitives.aChar == DefaultValueProvider.CHAR
+        instance.primitives.aShort == DefaultValueProvider.SHORT
+        instance.primitives.anInt == DefaultValueProvider.INT
+        instance.primitives.aLong == DefaultValueProvider.LONG
+        instance.primitives.aFloat == DefaultValueProvider.FLOAT
+        instance.primitives.aDouble == DefaultValueProvider.DOUBLE
+        instance.primitives.string == DefaultValueProvider.STRING
         instance.primitives.anEnum == AnEnum.FOO
 
-        instance.finalPrimitives.aBoolean == defaultValueProvider.BOOLEAN
-        instance.finalPrimitives.aByte == defaultValueProvider.BYTE
-        instance.finalPrimitives.aChar == defaultValueProvider.CHAR
-        instance.finalPrimitives.aShort == defaultValueProvider.SHORT
-        instance.finalPrimitives.anInt == defaultValueProvider.INT
-        instance.finalPrimitives.aLong == defaultValueProvider.LONG
-        instance.finalPrimitives.aFloat == defaultValueProvider.FLOAT
-        instance.finalPrimitives.aDouble == defaultValueProvider.DOUBLE
-        instance.finalPrimitives.string == defaultValueProvider.STRING
+        instance.finalPrimitives.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.finalPrimitives.aByte == DefaultValueProvider.BYTE
+        instance.finalPrimitives.aChar == DefaultValueProvider.CHAR
+        instance.finalPrimitives.aShort == DefaultValueProvider.SHORT
+        instance.finalPrimitives.anInt == DefaultValueProvider.INT
+        instance.finalPrimitives.aLong == DefaultValueProvider.LONG
+        instance.finalPrimitives.aFloat == DefaultValueProvider.FLOAT
+        instance.finalPrimitives.aDouble == DefaultValueProvider.DOUBLE
+        instance.finalPrimitives.string == DefaultValueProvider.STRING
         instance.finalPrimitives.anEnum == AnEnum.FOO
 
         instance.primitiveArrays.booleans.length == 1
@@ -157,15 +155,15 @@ class PojofillSpec extends Specification {
         instance.primitiveArrays.doubles.length == 1
         instance.primitiveArrays.strings.length == 1
         instance.primitiveArrays.anEnums.length == 1
-        instance.primitiveArrays.booleans[0] == defaultValueProvider.BOOLEAN
-        instance.primitiveArrays.bytes[0] == defaultValueProvider.BYTE
-        instance.primitiveArrays.chars[0] == defaultValueProvider.CHAR
-        instance.primitiveArrays.shorts[0] == defaultValueProvider.SHORT
-        instance.primitiveArrays.ints[0] == defaultValueProvider.INT
-        instance.primitiveArrays.longs[0] == defaultValueProvider.LONG
-        instance.primitiveArrays.floats[0] == defaultValueProvider.FLOAT
-        instance.primitiveArrays.doubles[0] == defaultValueProvider.DOUBLE
-        instance.primitiveArrays.strings[0] == defaultValueProvider.STRING
+        instance.primitiveArrays.booleans[0] == DefaultValueProvider.BOOLEAN
+        instance.primitiveArrays.bytes[0] == DefaultValueProvider.BYTE
+        instance.primitiveArrays.chars[0] == DefaultValueProvider.CHAR
+        instance.primitiveArrays.shorts[0] == DefaultValueProvider.SHORT
+        instance.primitiveArrays.ints[0] == DefaultValueProvider.INT
+        instance.primitiveArrays.longs[0] == DefaultValueProvider.LONG
+        instance.primitiveArrays.floats[0] == DefaultValueProvider.FLOAT
+        instance.primitiveArrays.doubles[0] == DefaultValueProvider.DOUBLE
+        instance.primitiveArrays.strings[0] == DefaultValueProvider.STRING
         instance.primitiveArrays.anEnums[0] == AnEnum.FOO
 
         instance.finalPrimitiveArrays.booleans.length == 1
@@ -178,15 +176,15 @@ class PojofillSpec extends Specification {
         instance.finalPrimitiveArrays.doubles.length == 1
         instance.finalPrimitiveArrays.strings.length == 1
         instance.finalPrimitiveArrays.anEnums.length == 1
-        instance.finalPrimitiveArrays.booleans[0] == defaultValueProvider.BOOLEAN
-        instance.finalPrimitiveArrays.bytes[0] == defaultValueProvider.BYTE
-        instance.finalPrimitiveArrays.chars[0] == defaultValueProvider.CHAR
-        instance.finalPrimitiveArrays.shorts[0] == defaultValueProvider.SHORT
-        instance.finalPrimitiveArrays.ints[0] == defaultValueProvider.INT
-        instance.finalPrimitiveArrays.longs[0] == defaultValueProvider.LONG
-        instance.finalPrimitiveArrays.floats[0] == defaultValueProvider.FLOAT
-        instance.finalPrimitiveArrays.doubles[0] == defaultValueProvider.DOUBLE
-        instance.finalPrimitiveArrays.strings[0] == defaultValueProvider.STRING
+        instance.finalPrimitiveArrays.booleans[0] == DefaultValueProvider.BOOLEAN
+        instance.finalPrimitiveArrays.bytes[0] == DefaultValueProvider.BYTE
+        instance.finalPrimitiveArrays.chars[0] == DefaultValueProvider.CHAR
+        instance.finalPrimitiveArrays.shorts[0] == DefaultValueProvider.SHORT
+        instance.finalPrimitiveArrays.ints[0] == DefaultValueProvider.INT
+        instance.finalPrimitiveArrays.longs[0] == DefaultValueProvider.LONG
+        instance.finalPrimitiveArrays.floats[0] == DefaultValueProvider.FLOAT
+        instance.finalPrimitiveArrays.doubles[0] == DefaultValueProvider.DOUBLE
+        instance.finalPrimitiveArrays.strings[0] == DefaultValueProvider.STRING
         instance.finalPrimitiveArrays.anEnums[0] == AnEnum.FOO
 
         instance.anInterface == null
@@ -202,26 +200,26 @@ class PojofillSpec extends Specification {
         then:
         instance instanceof FinalCompositeOfPrimitives
 
-        instance.primitives.aBoolean == defaultValueProvider.BOOLEAN
-        instance.primitives.aByte == defaultValueProvider.BYTE
-        instance.primitives.aChar == defaultValueProvider.CHAR
-        instance.primitives.aShort == defaultValueProvider.SHORT
-        instance.primitives.anInt == defaultValueProvider.INT
-        instance.primitives.aLong == defaultValueProvider.LONG
-        instance.primitives.aFloat == defaultValueProvider.FLOAT
-        instance.primitives.aDouble == defaultValueProvider.DOUBLE
-        instance.primitives.string == defaultValueProvider.STRING
+        instance.primitives.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.primitives.aByte == DefaultValueProvider.BYTE
+        instance.primitives.aChar == DefaultValueProvider.CHAR
+        instance.primitives.aShort == DefaultValueProvider.SHORT
+        instance.primitives.anInt == DefaultValueProvider.INT
+        instance.primitives.aLong == DefaultValueProvider.LONG
+        instance.primitives.aFloat == DefaultValueProvider.FLOAT
+        instance.primitives.aDouble == DefaultValueProvider.DOUBLE
+        instance.primitives.string == DefaultValueProvider.STRING
         instance.primitives.anEnum == AnEnum.FOO
 
-        instance.finalPrimitives.aBoolean == defaultValueProvider.BOOLEAN
-        instance.finalPrimitives.aByte == defaultValueProvider.BYTE
-        instance.finalPrimitives.aChar == defaultValueProvider.CHAR
-        instance.finalPrimitives.aShort == defaultValueProvider.SHORT
-        instance.finalPrimitives.anInt == defaultValueProvider.INT
-        instance.finalPrimitives.aLong == defaultValueProvider.LONG
-        instance.finalPrimitives.aFloat == defaultValueProvider.FLOAT
-        instance.finalPrimitives.aDouble == defaultValueProvider.DOUBLE
-        instance.finalPrimitives.string == defaultValueProvider.STRING
+        instance.finalPrimitives.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.finalPrimitives.aByte == DefaultValueProvider.BYTE
+        instance.finalPrimitives.aChar == DefaultValueProvider.CHAR
+        instance.finalPrimitives.aShort == DefaultValueProvider.SHORT
+        instance.finalPrimitives.anInt == DefaultValueProvider.INT
+        instance.finalPrimitives.aLong == DefaultValueProvider.LONG
+        instance.finalPrimitives.aFloat == DefaultValueProvider.FLOAT
+        instance.finalPrimitives.aDouble == DefaultValueProvider.DOUBLE
+        instance.finalPrimitives.string == DefaultValueProvider.STRING
         instance.finalPrimitives.anEnum == AnEnum.FOO
 
         instance.primitiveArrays.booleans.length == 1
@@ -234,15 +232,15 @@ class PojofillSpec extends Specification {
         instance.primitiveArrays.doubles.length == 1
         instance.primitiveArrays.strings.length == 1
         instance.primitiveArrays.anEnums.length == 1
-        instance.primitiveArrays.booleans[0] == defaultValueProvider.BOOLEAN
-        instance.primitiveArrays.bytes[0] == defaultValueProvider.BYTE
-        instance.primitiveArrays.chars[0] == defaultValueProvider.CHAR
-        instance.primitiveArrays.shorts[0] == defaultValueProvider.SHORT
-        instance.primitiveArrays.ints[0] == defaultValueProvider.INT
-        instance.primitiveArrays.longs[0] == defaultValueProvider.LONG
-        instance.primitiveArrays.floats[0] == defaultValueProvider.FLOAT
-        instance.primitiveArrays.doubles[0] == defaultValueProvider.DOUBLE
-        instance.primitiveArrays.strings[0] == defaultValueProvider.STRING
+        instance.primitiveArrays.booleans[0] == DefaultValueProvider.BOOLEAN
+        instance.primitiveArrays.bytes[0] == DefaultValueProvider.BYTE
+        instance.primitiveArrays.chars[0] == DefaultValueProvider.CHAR
+        instance.primitiveArrays.shorts[0] == DefaultValueProvider.SHORT
+        instance.primitiveArrays.ints[0] == DefaultValueProvider.INT
+        instance.primitiveArrays.longs[0] == DefaultValueProvider.LONG
+        instance.primitiveArrays.floats[0] == DefaultValueProvider.FLOAT
+        instance.primitiveArrays.doubles[0] == DefaultValueProvider.DOUBLE
+        instance.primitiveArrays.strings[0] == DefaultValueProvider.STRING
         instance.primitiveArrays.anEnums[0] == AnEnum.FOO
 
         instance.finalPrimitiveArrays.booleans.length == 1
@@ -255,15 +253,15 @@ class PojofillSpec extends Specification {
         instance.finalPrimitiveArrays.doubles.length == 1
         instance.finalPrimitiveArrays.strings.length == 1
         instance.finalPrimitiveArrays.anEnums.length == 1
-        instance.finalPrimitiveArrays.booleans[0] == defaultValueProvider.BOOLEAN
-        instance.finalPrimitiveArrays.bytes[0] == defaultValueProvider.BYTE
-        instance.finalPrimitiveArrays.chars[0] == defaultValueProvider.CHAR
-        instance.finalPrimitiveArrays.shorts[0] == defaultValueProvider.SHORT
-        instance.finalPrimitiveArrays.ints[0] == defaultValueProvider.INT
-        instance.finalPrimitiveArrays.longs[0] == defaultValueProvider.LONG
-        instance.finalPrimitiveArrays.floats[0] == defaultValueProvider.FLOAT
-        instance.finalPrimitiveArrays.doubles[0] == defaultValueProvider.DOUBLE
-        instance.finalPrimitiveArrays.strings[0] == defaultValueProvider.STRING
+        instance.finalPrimitiveArrays.booleans[0] == DefaultValueProvider.BOOLEAN
+        instance.finalPrimitiveArrays.bytes[0] == DefaultValueProvider.BYTE
+        instance.finalPrimitiveArrays.chars[0] == DefaultValueProvider.CHAR
+        instance.finalPrimitiveArrays.shorts[0] == DefaultValueProvider.SHORT
+        instance.finalPrimitiveArrays.ints[0] == DefaultValueProvider.INT
+        instance.finalPrimitiveArrays.longs[0] == DefaultValueProvider.LONG
+        instance.finalPrimitiveArrays.floats[0] == DefaultValueProvider.FLOAT
+        instance.finalPrimitiveArrays.doubles[0] == DefaultValueProvider.DOUBLE
+        instance.finalPrimitiveArrays.strings[0] == DefaultValueProvider.STRING
         instance.finalPrimitiveArrays.anEnums[0] == AnEnum.FOO
 
         instance.anInterface == null
@@ -295,14 +293,14 @@ class PojofillSpec extends Specification {
 
         then:
         instance instanceof Primitives
-        instance.aBoolean == defaultValueProvider.BOOLEAN
-        instance.aByte == defaultValueProvider.BYTE
-        instance.aChar == defaultValueProvider.CHAR
-        instance.aShort == defaultValueProvider.SHORT
+        instance.aBoolean == DefaultValueProvider.BOOLEAN
+        instance.aByte == DefaultValueProvider.BYTE
+        instance.aChar == DefaultValueProvider.CHAR
+        instance.aShort == DefaultValueProvider.SHORT
         instance.anInt == -100
-        instance.aLong == defaultValueProvider.LONG
-        instance.aFloat == defaultValueProvider.FLOAT
-        instance.aDouble == defaultValueProvider.DOUBLE
+        instance.aLong == DefaultValueProvider.LONG
+        instance.aFloat == DefaultValueProvider.FLOAT
+        instance.aDouble == DefaultValueProvider.DOUBLE
         instance.string == 'setString'
         instance.anEnum == AnEnum.FOO
     }
