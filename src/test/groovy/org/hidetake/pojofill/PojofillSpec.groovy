@@ -2,6 +2,8 @@ package org.hidetake.pojofill
 
 import org.hidetake.pojofill.context.InstantiationContext
 import org.hidetake.pojofill.context.SetterArgument
+import org.hidetake.pojofill.example.Pen
+import org.hidetake.pojofill.example.Person
 import org.hidetake.pojofill.fixture.AnEnum
 import org.hidetake.pojofill.fixture.TypeAggregateWithConstructor
 import org.hidetake.pojofill.fixture.TypeAggregateWithSetters
@@ -111,6 +113,16 @@ class PojofillSpec extends Specification {
         instance.doubles[0] == DefaultValueProvider.DOUBLE
         instance.strings[0] == DefaultValueProvider.STRING
         instance.anEnums[0] == AnEnum.FOO
+    }
+
+    def 'nested type should be instantiated'() {
+        when:
+        def instance = pojofill.newInstanceOrNull(Person)
+
+        then:
+        instance.id == DefaultValueProvider.INT
+        instance.pens.size() == 1
+        instance.pens.head().color == Pen.Color.RED
     }
 
     def 'addInstantiator should add custom instantiator at first'() {

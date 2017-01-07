@@ -26,22 +26,36 @@ compile 'org.hidetake:pojofill:1.2.0'
 Let's take a look at the example.
 
 ```java
-import lombok.Data;
-
-@Data
+// Person.java
+@lombok.Data
 public class Person {
   private final int id;
   private final String name;
+  private List<Pen> pens;
 }
 ```
 
 ```java
+// Pen.java
+@lombok.Data
+public class Pen {
+    private final Color color;
+
+    public enum Color {
+        RED, YELLOW, GREEN, BLUE
+    }
+}
+```
+
+```java
+// Main.java
 import org.hidetake.pojofill.Pojofill;
 
 public class Main {
   public static void main(String[] args) {
     Pojofill pojofill = new Pojofill();
-    pojofill.newInstance(Person.class).ifPresent(System.out::println);
+    Person person = pojofill.newInstanceOrNull(Person.class);
+    System.out.println(person);
   }
 }
 ```
@@ -49,7 +63,7 @@ public class Main {
 Output will be following:
 
 ```
-Person(id=123456, name=abcde)
+Person(id=123456, name=abcde, pens=[Pen(color=RED)])
 ```
 
 
